@@ -1,0 +1,44 @@
+<div class="card border-primary mt-1 mb-1 text-center">
+  <div class="card-header">Alumnos</div>
+  <div class="card-body text-primary">
+    <h5 class="card-title">Listado de alumnos</h5>
+
+    <div class="my-2 text-left">
+      <button class="btn btn-rounded btn-primary" type="button" [routerLink] = "['/presencial/alumnos']">Nuevo Alumno</button>
+    </div>
+
+    <div *ngIf="alumnos?.length == 0" class="alert alert-info">
+      No hay registros en la base de datos.
+    </div>
+
+    <table class="table table-bordered table table-striped" *ngIf="alumnos?.length>0">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Email</th>
+          <th>
+            Editar
+          </th>
+          <th>Eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let alumno of alumnos">
+          <td>{{ alumno.id }}</td>
+          <td>{{ alumno.nombre }}</td>
+          <td>{{ alumno.apellido }}</td>
+          <td>{{ alumno.email }}</td>
+          <td>
+            <button type="button" name="editar" [routerLink] ="['/presencial/alumnos', alumno.id]" class="btn btn-primary btn-sm">Editar</button>
+          </td>
+          <td>
+            <button type="button" name="borrar" (click)='delete(alumno)' class="btn btn-danger btn-sm">Borrar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
