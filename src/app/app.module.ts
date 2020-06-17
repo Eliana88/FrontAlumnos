@@ -11,6 +11,7 @@ import { LoginComponent } from './usuarios/login.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
+import { ClimaComponent } from './clima/clima.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -30,7 +31,8 @@ const routes: Routes = [
     LoginComponent,
     HeaderComponent,
     FooterComponent,
-    HomeComponent
+    HomeComponent,
+    ClimaComponent
   ],
 
   imports: [

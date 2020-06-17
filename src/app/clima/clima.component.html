@@ -1,0 +1,11 @@
+<div class="card border-primary mt-1 mb-1">
+    <div class="cardbody" *ngIf="clima">
+        <div class="row m-1">
+            <div class="col-md-auto">Temperatura: {{ clima.main.temp}}°C</div>
+            <div class="col-md-auto">Presión: {{ clima.main.pressure}}Hp</div>
+            <div class="col-md-auto">Humedad: {{ clima.main.humidity}}%</div>
+            <div class="col-md-auto">Sensación Térmica: {{ clima.main.feels_like}}°C </div>
+            <div class="col-md-auto">Estado Actual: {{ clima.weather[0].description }}</div>
+        </div>
+    </div>
+</div>
