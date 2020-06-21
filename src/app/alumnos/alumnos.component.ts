@@ -23,7 +23,7 @@ export class AlumnosComponent implements OnInit {
   delete(alumno: Alumno): void {
     swal({
       title: 'Está seguro?',
-      text: `¿Seguro que desea eliminar al cliente ${alumno.nombre} ${alumno.apellido}?`,
+      text: `¿Seguro que desea eliminar al alumno ${alumno.nombre} ${alumno.apellido}?`,
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',

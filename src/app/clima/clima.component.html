@@ -1,11 +1,16 @@
-<div class="card border-primary mt-1 mb-1">
+<div class="card border-primary my-1">
     <div class="cardbody" *ngIf="clima">
-        <div class="row m-1">
-            <div class="col-md-auto">Temperatura: {{ clima.main.temp}}°C</div>
-            <div class="col-md-auto">Presión: {{ clima.main.pressure}}Hp</div>
-            <div class="col-md-auto">Humedad: {{ clima.main.humidity}}%</div>
-            <div class="col-md-auto">Sensación Térmica: {{ clima.main.feels_like}}°C </div>
-            <div class="col-md-auto">Estado Actual: {{ clima.weather[0].description }}</div>
-        </div>
+        <div class="media">
+            <img class="mx-1" width="8%" height= "8%" src="http://openweathermap.org/img/w/{{clima.weather[0].icon}}.png" alt="imagen de tiempo">
+            <div class="media-body">
+              <h5 class="mt-1">Tiempo Actual</h5>
+              <div class="row mb-0">
+                <div class="col-md-auto">Temperatura: {{ clima.main.temp}} °C</div>
+                <div class="col-md-auto">Presión: {{ clima.main.pressure}} Hpa</div>
+                <div class="col-md-auto">Humedad: {{ clima.main.humidity}} %</div>
+                <div class="col-md-auto">Sensación Térmica: {{ clima.main.feels_like}} °C </div>
+              </div>
+            </div>
+         </div>
     </div>
 </div>

@@ -3,5 +3,5 @@ export class Alumno {
   nombre: string;
   apellido: string;
   email: string;
-  afiliado: boolean;
+  afiliado: string;
 }

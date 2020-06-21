@@ -18,6 +18,7 @@
           <th>Nombre</th>
           <th>Apellido</th>
           <th>Email</th>
+          <th>Afiliado</th>
           <th>
             Editar
           </th>
@@ -30,6 +31,7 @@
           <td>{{ alumno.nombre }}</td>
           <td>{{ alumno.apellido }}</td>
           <td>{{ alumno.email }}</td>
+          <td>{{ alumno.afiliado }}</td>
           <td>
             <button type="button" name="editar" [routerLink] ="['/presencial/alumnos', alumno.id]" class="btn btn-primary btn-sm">Editar</button>
           </td>
