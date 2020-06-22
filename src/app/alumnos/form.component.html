@@ -1,7 +1,7 @@
 <div class="card bg-dark text-white">
   <div class="card-header">{{ titulo }}</div>
   <div class="card-body">
-    <form>
+    <form #alumnoForm="ngForm">
       <div class="form-group row">
         <label for="nombre" class="col-form-label col-sm-2">Nombre</label>
         <div class="col-sm-6">
@@ -57,9 +57,9 @@
       <div class="form-group row">
         <div class="col-sm-6">
           <button class="btn btn-primary" role="button" (click)='create()'
-            *ngIf="!alumno.id else elseBlock">Crear</button>
+            *ngIf="!alumno.id else elseBlock" [disabled]="!alumnoForm.form.valid">Crear</button>
           <ng-template #elseBlock>
-            <button class="btn btn-primary" role="button" (click)='update()'>Editar</button>
+            <button class="btn btn-primary" role="button" (click)='update()' [disabled]="!alumnoForm.form.valid">Editar</button>
           </ng-template>
         </div>
       </div>

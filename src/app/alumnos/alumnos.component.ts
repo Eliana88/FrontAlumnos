@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Alumno } from './alumno';
 import { AlumnoService } from './alumno.service';
 import swal from "sweetalert2";
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'app-alumnos',
@@ -11,13 +12,31 @@ import swal from "sweetalert2";
 export class AlumnosComponent implements OnInit {
 
   alumnos: Alumno[];
+  paginador: any;
 
-  constructor(private alumnoService: AlumnoService ) { }
+  constructor(private alumnoService: AlumnoService,
+              private activatedRoute: ActivatedRoute ) { }
 
   ngOnInit(): void {
-    this.alumnoService.getAlumnos().subscribe(
-      alumnos => this.alumnos = alumnos
+    
+    this.activatedRoute.paramMap.subscribe(
+      params => {
+        let page: number = +params.get('page');
+
+        if(!page){
+          page = 0;
+        }
+
+        this.alumnoService.getAlumnos(page).subscribe(
+          response =>{
+            this.alumnos = response.content as Alumno[];
+            this.paginador = response;
+
+          } 
+        );
+      }
     );
+
   }
 
   delete(alumno: Alumno): void {
@@ -42,7 +61,7 @@ export class AlumnosComponent implements OnInit {
             this.alumnos = this.alumnos.filter(alu => alu !== alumno)
             swal(
               'Alumno Eliminado!',
-              `Alumno ${alumno.nombre} eliminado con éxito.`,
+              `Alumno eliminado con éxito.`,
               'success'
             )
           }

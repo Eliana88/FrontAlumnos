@@ -44,9 +44,16 @@ export class AlumnoService {
     return false;
   }
 
-  getAlumnos(): Observable<Alumno[]>{
+  getAlumnos(page: number): Observable<any>{
   //  return of(ALUMNOS);
-    return this.http.get<Alumno[]>(this.urlEndPoint);
+    return this.http.get<Alumno[]>(this.urlEndPoint + '/page/' + page).pipe(
+      tap((response: any) => {
+        console.log('Alumno Service');
+        (response.content as Alumno[]).forEach(alumno => {
+          console.log(alumno.nombre);
+        });
+      })
+    )
   }
 
   create(alumno: Alumno): Observable<Alumno> {

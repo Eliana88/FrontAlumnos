@@ -37,7 +37,7 @@ export class FormComponent implements OnInit {
     this.alumnoService.create(this.alumno)
     .subscribe(alumno => {
       this.router.navigate(['/presencial'])
-      swal('Nuevo Alumno',`Alumno: ${alumno.nombre +' '+ alumno.apellido} creado con exito!`, 'success')
+      swal('Nuevo Alumno',`Alumno creado con exito!`, 'success')
     }
   )
   }
@@ -46,7 +46,7 @@ export class FormComponent implements OnInit {
     this.alumnoService.update(this.alumno)
     .subscribe(alumno => {
       this.router.navigate(['/presencial'])
-      swal('Alumno Actualizado',`Alumno: ${alumno.nombre +' '+ alumno.apellido} actualizado con exito!`, 'success')
+      swal('Alumno Actualizado','Alumno actualizado con exito!', 'success')
     })
   }
 
