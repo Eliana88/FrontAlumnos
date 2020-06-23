@@ -4,7 +4,7 @@
     <h5 class="card-title">Listado de alumnos</h5>
 
     <div class="my-2 text-left">
-      <button class="btn btn-rounded btn-primary" type="button" [routerLink] = "['/presencial/alumnos']">Nuevo Alumno</button>
+      <button *ngIf="authService.hasRole('ROLE_ADMIN')" class="btn btn-rounded btn-primary" type="button" [routerLink] = "['/presencial/alumnos']">Nuevo Alumno</button>
     </div>
 
     <div *ngIf="alumnos?.length == 0" class="alert alert-info">
@@ -17,12 +17,12 @@
           <th>Id</th>
           <th>Nombre</th>
           <th>Apellido</th>
-          <th>Email</th>
-          <th>Afiliado</th>
-          <th>
+          <th *ngIf="authService.hasRole('ROLE_ADMIN') || authService.hasRole('ROLE_USER')">Email</th>
+          <th *ngIf="authService.hasRole('ROLE_ADMIN')">Afiliado</th>
+          <th *ngIf="authService.hasRole('ROLE_ADMIN')">
             Editar
           </th>
-          <th>Eliminar</th>
+          <th *ngIf="authService.hasRole('ROLE_ADMIN')">Eliminar</th>
         </tr>
       </thead>
       <tbody>
@@ -30,12 +30,12 @@
           <td>{{ alumno.id }}</td>
           <td>{{ alumno.nombre }}</td>
           <td>{{ alumno.apellido | uppercase }}</td>
-          <td>{{ alumno.email }}</td>
-          <td>{{ alumno.afiliado }}</td>
-          <td>
+          <td *ngIf="authService.hasRole('ROLE_ADMIN') || authService.hasRole('ROLE_USER')">{{ alumno.email }}</td>
+          <td *ngIf="authService.hasRole('ROLE_ADMIN')">{{ alumno.afiliado }}</td>
+          <td *ngIf="authService.hasRole('ROLE_ADMIN')">
             <button type="button" name="editar" [routerLink] ="['/presencial/alumnos', alumno.id]" class="btn btn-primary btn-sm">Editar</button>
           </td>
-          <td>
+          <td *ngIf="authService.hasRole('ROLE_ADMIN')">
             <button type="button" name="borrar" (click)='delete(alumno)' class="btn btn-danger btn-sm">Borrar</button>
           </td>
         </tr>

@@ -3,6 +3,7 @@ import { Alumno } from './alumno';
 import { AlumnoService } from './alumno.service';
 import swal from "sweetalert2";
 import { ActivatedRoute } from '@angular/router'
+import { AuthService } from '../usuarios/auth.service';
 
 @Component({
   selector: 'app-alumnos',
@@ -15,6 +16,7 @@ export class AlumnosComponent implements OnInit {
   paginador: any;
 
   constructor(private alumnoService: AlumnoService,
+              public authService: AuthService,
               private activatedRoute: ActivatedRoute ) { }
 
   ngOnInit(): void {

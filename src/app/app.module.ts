@@ -13,8 +13,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AlumnoService } from './alumnos/alumno.service';
 import { RouterModule, Routes } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { RoleGuard } from './usuarios/guards/role.guard';
+import { TokenInterceptor } from './usuarios/interceptors/token.interceptor';
+import { AuthInterceptor } from './usuarios/interceptors/auth.interceptor';
 
 
 const routes: Routes = [
@@ -22,8 +25,8 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'presencial', component: AlumnosComponent},
   {path: 'presencial/page/:page', component: AlumnosComponent},
-  {path: 'presencial/alumnos', component: FormComponent},
-  {path: 'presencial/alumnos/:id', component: FormComponent},
+  {path: 'presencial/alumnos', component: FormComponent, canActivate:[RoleGuard], data:{role:'ROLE_ADMIN'}},
+  {path: 'presencial/alumnos/:id', component: FormComponent, canActivate:[RoleGuard], data:{role:'ROLE_ADMIN'}},
   {path: 'presencial/login', component: LoginComponent}
 ]
 
@@ -48,7 +51,9 @@ const routes: Routes = [
     RouterModule.forRoot(routes)
 
   ],
-  providers: [AlumnoService],
+  providers: [AlumnoService,
+    {provide:  HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
+    {provide:  HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

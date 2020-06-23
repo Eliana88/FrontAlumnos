@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 
 @Component({
@@ -17,10 +17,20 @@ export class PaginatorComponent implements OnInit, OnChanges {
   constructor() { }
 
   ngOnInit(): void {
+    this.initpaginator();
     
   }
 
-  ngOnChanges(){
+  ngOnChanges(changes: SimpleChanges){
+    let paginadorActualizado = changes['paginador'];
+    if(paginadorActualizado.previousValue){
+      this.initpaginator();
+    }
+    
+
+  }
+
+  private initpaginator(): void {
     this.desde = Math.min(Math.max(1, this.paginador.number-4), this.paginador.totalPages-5);
     this.hasta = Math.max(Math.min(this.paginador.totalPages, this.paginador.number+4), 6);
 

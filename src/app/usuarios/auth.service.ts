@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Usuario } from './usuario';
+import { URL_BACKEND } from '../config/config';
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +36,11 @@ export class AuthService {
   }
 
   login(usuario: Usuario):Observable<any>{
-    const urlEndpoint = 'http://localhost:8080/oauth/token';
+
+    //URL DESA
+    //const urlEndpoint = 'http://localhost:8080/oauth/token';
+    //URL PROD
+    const urlEndpoint =  URL_BACKEND + '/oauth/token';
     const credenciales = btoa('angularapp' + ':' + '12345');
     const httpHeaders = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded',
                                           'Authorization': 'Basic '+ credenciales});
@@ -79,6 +84,14 @@ export class AuthService {
       return true;
     }
     return false;
+  }
+
+  hasRole(role: string): boolean{
+    if(this.usuario.roles.includes(role)){
+      return true;
+    }else{
+      return false;
+    }
   }
 
   logout():void{

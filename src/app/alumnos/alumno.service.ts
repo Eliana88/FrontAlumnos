@@ -6,27 +6,38 @@ import { Observable, throwError } from 'rxjs';
 import swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { AuthService } from '../usuarios/auth.service';
+import { URL_BACKEND } from '../config/config';
+
 
 @Injectable()
 export class AlumnoService {
 
-  private urlEndPoint:string = 'http://localhost:8080/api/alumnos';
-  //private urlEndPoint:string = 'https://app-alumnos-irso.herokuapp.com/api/alumnos';
-  private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
+  //URL DESA
+  //private urlEndPoint:string = 'http://localhost:8080/api/alumnos';
+  
+  //URL PROD
+  private urlEndPoint:string = URL_BACKEND + '/api/alumnos';
+  
+  //private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   constructor(private http: HttpClient, private router: Router,
     private authService: AuthService) { }
 
-  private agregarAuthorizationHeader() {
+
+  //Se eliminó este método ya que la cabeceras se envian con INTERCEPTOR
+  /*private agregarAuthorizationHeader() {
     let token = this.authService.token;
     if (token != null) {
       return this.httpHeaders.append('Authorization', 'Bearer ' + token);
       }
     return this.httpHeaders;
-  }
+  }*/
 
-
-  private isNoAutorizado(e): boolean {
+  //este metodo se utilizaba antes de la creación de los guards
+  //cuando se iba al backend, con los guards verifica que este autenticado 
+  //primero - lo dejo a modo de referencia. Pero no debería llegar a esta instancia.
+  //se crea además la clase interceptora para estos codigos.
+  /*private isNoAutorizado(e): boolean {
     if (e.status == 401) {
 
       if (this.authService.isAuthenticated()) {
@@ -42,7 +53,9 @@ export class AlumnoService {
       return true;
     }
     return false;
-  }
+  }*/
+
+  //----- metodos http-----------//
 
   getAlumnos(page: number): Observable<any>{
   //  return of(ALUMNOS);
@@ -57,14 +70,13 @@ export class AlumnoService {
   }
 
   create(alumno: Alumno): Observable<Alumno> {
-    return this.http.post<Alumno>(this.urlEndPoint, alumno,
-      { headers: this.agregarAuthorizationHeader() })
+    return this.http.post<Alumno>(this.urlEndPoint, alumno)
       .pipe(
         map((response: any) => response.alumno as Alumno),
         catchError(e => {
-          if(this.isNoAutorizado(e)){
-            return throwError(e);
-          }
+       //   if(this.isNoAutorizado(e)){
+      //    return throwError(e);
+      //    }
           console.error(e.error.message);
           swal(e.error.message, e.error.error, 'error');
           return throwError(e);
@@ -73,15 +85,16 @@ export class AlumnoService {
   }
 
   getAlumno(id: number): Observable<Alumno>{
-    return this.http.get<Alumno>(`${this.urlEndPoint}/${id}`,
-      {headers: this.agregarAuthorizationHeader()}).pipe(
+    return this.http.get<Alumno>(`${this.urlEndPoint}/${id}`).pipe(
        catchError(e => {
-        if(this.isNoAutorizado(e)){
-          return throwError(e);
-        }
-        this.router.navigate(['/presencial']);
-        console.error(e.error.message);
-        swal(e.error.message, e.error.error, 'error');
+        //   if(this.isNoAutorizado(e)){
+      //    return throwError(e);
+      //    }
+      
+          this.router.navigate(['/presencial']);
+          console.error(e.error.message);
+          swal(e.error.message, e.error.error, 'error');
+          
         return throwError(e);
       })
     )
@@ -89,12 +102,11 @@ export class AlumnoService {
 
 
   getAlumnoByEmail(email: string): Observable<Alumno[]>{
-    return this.http.get<Alumno[]>(`${this.urlEndPoint}?email=${email}`,
-      {headers: this.agregarAuthorizationHeader()}).pipe(
+    return this.http.get<Alumno[]>(`${this.urlEndPoint}?email=${email}`).pipe(
         catchError(e => {
-          if(this.isNoAutorizado(e)){
-            return throwError(e);
-          }
+        //   if(this.isNoAutorizado(e)){
+      //    return throwError(e);
+      //    }
         this.router.navigate(['/presencial']);
         console.error(e.error.message);
         swal(e.error.message, e.error.error, 'error');
@@ -104,14 +116,13 @@ export class AlumnoService {
   }
 
   update(alumno: Alumno): Observable<Alumno> {
-    return this.http.put<Alumno>(`${this.urlEndPoint}/${alumno.id}`, alumno,
-      { headers: this.agregarAuthorizationHeader()})
+    return this.http.put<Alumno>(`${this.urlEndPoint}/${alumno.id}`, alumno)
       .pipe(
         map((response: any) => response.alumno as Alumno),
         catchError(e => {
-          if (this.isNoAutorizado(e)) {
-            return throwError(e);
-          }
+          //   if(this.isNoAutorizado(e)){
+      //    return throwError(e);
+      //    }
           console.error(e.error.message);
           swal(e.error.message, e.error.error, 'error');
           return throwError(e);
@@ -120,12 +131,12 @@ export class AlumnoService {
   }
 
   delete(id: number): Observable<Alumno> {
-    return this.http.delete<Alumno>(`${this.urlEndPoint}/${id}`, { headers: this.agregarAuthorizationHeader() }).pipe(
+    return this.http.delete<Alumno>(`${this.urlEndPoint}/${id}`).pipe(
       catchError(e => {
 
-        if (this.isNoAutorizado(e)) {
-          return throwError(e);
-        }
+        //   if(this.isNoAutorizado(e)){
+      //    return throwError(e);
+      //    }
 
         console.error(e.error.message);
         swal(e.error.message, e.error.error, 'error');
