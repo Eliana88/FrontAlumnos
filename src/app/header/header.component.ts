@@ -19,7 +19,7 @@ export class HeaderComponent {
     let username = this.authService.usuario.username;
     this.authService.logout();
     swal('Logout', `Hola ${username}, has cerrado sesión con éxito!`, 'success');
-    this.router.navigate(['/login']);
+    this.router.navigate(['presencial/login']);
   }
 
 }

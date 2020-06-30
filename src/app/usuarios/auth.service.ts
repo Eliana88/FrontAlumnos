@@ -40,7 +40,7 @@ export class AuthService {
     //URL DESA
     //const urlEndpoint = 'http://localhost:8080/oauth/token';
     //URL PROD
-    const urlEndpoint =  URL_BACKEND + '/oauth/token';
+    const urlEndpoint =  URL_BACKEND + 'oauth/token';
     const credenciales = btoa('angularapp' + ':' + '12345');
     const httpHeaders = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded',
                                           'Authorization': 'Basic '+ credenciales});

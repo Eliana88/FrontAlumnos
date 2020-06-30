@@ -16,7 +16,7 @@ export class AlumnoService {
   //private urlEndPoint:string = 'http://localhost:8080/api/alumnos';
   
   //URL PROD
-  private urlEndPoint:string = URL_BACKEND + '/api/alumnos';
+  private urlEndPoint:string = URL_BACKEND + 'api/alumnos';
   
   //private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
@@ -59,7 +59,7 @@ export class AlumnoService {
 
   getAlumnos(page: number): Observable<any>{
   //  return of(ALUMNOS);
-    return this.http.get<Alumno[]>(this.urlEndPoint + '/page/' + page).pipe(
+    return this.http.get<Alumno[]>(this.urlEndPoint + '?page=' + page).pipe(
       tap((response: any) => {
         console.log('Alumno Service');
         (response.content as Alumno[]).forEach(alumno => {

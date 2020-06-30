@@ -23,6 +23,7 @@ constructor( private authService: AuthService, private router: Router){
           if (this.authService.isAuthenticated()) {
             this.authService.logout();
           }
+
           this.router.navigate(['/presencial/login']);
   
         }
@@ -32,7 +33,8 @@ constructor( private authService: AuthService, private router: Router){
           this.router.navigate(['/presencial']);
     
         }
-        return throwError;
+
+        return throwError(e);
        
       })
 
