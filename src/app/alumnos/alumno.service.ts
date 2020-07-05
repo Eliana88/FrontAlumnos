@@ -59,7 +59,7 @@ export class AlumnoService {
 
   getAlumnos(page: number): Observable<any>{
   //  return of(ALUMNOS);
-    return this.http.get<Alumno[]>(this.urlEndPoint + '?page=' + page).pipe(
+    return this.http.get<Alumno[]>(this.urlEndPoint + '?page=' + page + '&q=' + 8).pipe(
       tap((response: any) => {
         console.log('Alumno Service');
         (response.content as Alumno[]).forEach(alumno => {

@@ -3,8 +3,14 @@
   <div class="card-body text-primary">
     <h5 class="card-title">Listado de alumnos</h5>
 
-    <div class="my-2 text-left">
-      <button *ngIf="authService.hasRole('ROLE_ADMIN')" class="btn btn-rounded btn-primary" type="button" [routerLink] = "['/presencial/alumnos']">Nuevo Alumno</button>
+    <div class="row my-2">
+      <div class="col-8 text-left">
+        <button *ngIf="authService.hasRole('ROLE_ADMIN')" class="btn btn-rounded btn-primary" type="button" [routerLink] = "['/presencial/alumnos']">Nuevo Alumno</button>
+      </div>
+      <div *ngIf="alumnos?.length>0" class="col-4 text-right">
+        <p>aca el paginador</p>
+      </div>
+
     </div>
 
     <div *ngIf="alumnos?.length == 0" class="alert alert-info">

@@ -41,7 +41,7 @@ const routes: Routes = [
     FooterComponent,
     HomeComponent,
     ClimaComponent,
-    PaginatorComponent
+    PaginatorComponent,
   ],
 
   imports: [

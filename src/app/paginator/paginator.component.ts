@@ -25,9 +25,7 @@ export class PaginatorComponent implements OnInit, OnChanges {
     let paginadorActualizado = changes['paginador'];
     if(paginadorActualizado.previousValue){
       this.initpaginator();
-    }
-    
-
+    } 
   }
 
   private initpaginator(): void {

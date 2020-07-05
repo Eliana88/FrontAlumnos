@@ -14,6 +14,7 @@ export class AlumnosComponent implements OnInit {
 
   alumnos: Alumno[];
   paginador: any;
+  
 
   constructor(private alumnoService: AlumnoService,
               public authService: AuthService,
@@ -57,7 +58,6 @@ export class AlumnosComponent implements OnInit {
       reverseButtons: true
     }).then((result) => {
       if (result.value) {
-
         this.alumnoService.delete(alumno.id).subscribe(
           response => {
             this.alumnos = this.alumnos.filter(alu => alu !== alumno)
@@ -66,6 +66,23 @@ export class AlumnosComponent implements OnInit {
               `Alumno eliminado con éxito.`,
               'success'
             )
+            this.activatedRoute.paramMap.subscribe(
+              params => {
+                let page: number = +params.get('page');
+
+                page = 0;
+        
+                this.alumnoService.getAlumnos(page).subscribe(
+                  response =>{
+                    this.alumnos = response.content as Alumno[];
+                    this.paginador = response;
+        
+                  } 
+                );
+              }
+            );
+
+
           }
         )
 

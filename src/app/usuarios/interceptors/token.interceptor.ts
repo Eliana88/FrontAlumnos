@@ -14,7 +14,9 @@ constructor( private authService: AuthService){
     Observable<HttpEvent<any>> {
 
         let token = this.authService.token;
-        if (token != null){
+      
+
+        if (token != null && req.method != 'GET' && req.url.includes('herokuapp')){
             const authReq = req.clone({
                 headers: req.headers.set('Authorization', 'Bearer' + token)
               });
