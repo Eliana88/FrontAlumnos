@@ -6,7 +6,6 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { ClimaComponent } from './clima/clima.component';
-import { PaginatorComponent } from './paginator/paginator.component';
 import { FormComponent } from './alumnos/form.component';
 //otras cosas
 import { BrowserModule } from '@angular/platform-browser';
@@ -18,6 +17,8 @@ import { FormsModule } from '@angular/forms';
 import { RoleGuard } from './usuarios/guards/role.guard';
 import { TokenInterceptor } from './usuarios/interceptors/token.interceptor';
 import { AuthInterceptor } from './usuarios/interceptors/auth.interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 const routes: Routes = [
@@ -41,14 +42,15 @@ const routes: Routes = [
     FooterComponent,
     HomeComponent,
     ClimaComponent,
-    PaginatorComponent,
   ],
 
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    BrowserAnimationsModule,
+    MatPaginatorModule
 
   ],
   providers: [AlumnoService,

@@ -1,19 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Alumno } from './alumno';
 import { AlumnoService } from './alumno.service';
 import swal from "sweetalert2";
 import { ActivatedRoute } from '@angular/router'
 import { AuthService } from '../usuarios/auth.service';
+import { PageEvent, MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-alumnos',
-  templateUrl: './alumnos.component.html',
-  styleUrls: ['./alumnos.component.css']
+  templateUrl: './alumnos.component.html'
 })
+
 export class AlumnosComponent implements OnInit {
 
   alumnos: Alumno[];
-  paginador: any;
+  
+  totalRegistros = 0;
+  paginaActual = 0;
+  totalPorPagina = 8;
+  pageSizeOptions: number [] = [3, 5, 10, 25, 50];
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   
 
   constructor(private alumnoService: AlumnoService,
@@ -21,25 +28,26 @@ export class AlumnosComponent implements OnInit {
               private activatedRoute: ActivatedRoute ) { }
 
   ngOnInit(): void {
-    
-    this.activatedRoute.paramMap.subscribe(
-      params => {
-        let page: number = +params.get('page');
+    this.calcularRangos();
+  }
 
-        if(!page){
-          page = 0;
-        }
+  paginar(event: PageEvent): void{
+    this.paginaActual = event.pageIndex;
+    this.totalPorPagina = event.pageSize;
+    this.calcularRangos();
 
-        this.alumnoService.getAlumnos(page).subscribe(
-          response =>{
-            this.alumnos = response.content as Alumno[];
-            this.paginador = response;
+  }
 
-          } 
-        );
-      }
-    );
+  calcularRangos(){
 
+    this.alumnoService.listarAlumnos(this.paginaActual.toString(), this.totalPorPagina.toString())
+    .subscribe(p =>
+      { 
+        this.alumnos = p.content as Alumno[];
+        this.totalRegistros = p.totalElements as number;
+        this.paginator._intl.itemsPerPageLabel = 'Registros por página';
+
+      });
   }
 
   delete(alumno: Alumno): void {
@@ -60,29 +68,13 @@ export class AlumnosComponent implements OnInit {
       if (result.value) {
         this.alumnoService.delete(alumno.id).subscribe(
           response => {
-            this.alumnos = this.alumnos.filter(alu => alu !== alumno)
+            this.calcularRangos();
             swal(
               'Alumno Eliminado!',
               `Alumno eliminado con éxito.`,
               'success'
             )
-            this.activatedRoute.paramMap.subscribe(
-              params => {
-                let page: number = +params.get('page');
-
-                page = 0;
-        
-                this.alumnoService.getAlumnos(page).subscribe(
-                  response =>{
-                    this.alumnos = response.content as Alumno[];
-                    this.paginador = response;
-        
-                  } 
-                );
-              }
-            );
-
-
+            
           }
         )
 
