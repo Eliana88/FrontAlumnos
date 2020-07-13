@@ -19,6 +19,7 @@ import { TokenInterceptor } from './usuarios/interceptors/token.interceptor';
 import { AuthInterceptor } from './usuarios/interceptors/auth.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { FilterPipe } from './alumnos/filter.pipe';
 
 
 const routes: Routes = [
@@ -42,6 +43,7 @@ const routes: Routes = [
     FooterComponent,
     HomeComponent,
     ClimaComponent,
+    FilterPipe,
   ],
 
   imports: [

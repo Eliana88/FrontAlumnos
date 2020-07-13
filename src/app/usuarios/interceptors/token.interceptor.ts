@@ -16,11 +16,11 @@ constructor( private authService: AuthService){
         let token = this.authService.token;
       
 
-        if (token != null && req.method != 'GET' && req.url.includes('herokuapp')){
+        if (token != null && req.url.includes('herokuapp')){
             const authReq = req.clone({
                 headers: req.headers.set('Authorization', 'Bearer' + token)
               });
-            console.log('TokenInterceptor => Bearer' + token)
+            //console.log('TokenInterceptor => Bearer' + token)
             return next.handle(authReq);
         }
 

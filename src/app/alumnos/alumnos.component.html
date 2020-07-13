@@ -4,9 +4,21 @@
     <h3 class="card-title">Listado de alumnos</h3>
 
 
-    <div class="my-2 text-left">
-      <button *ngIf="authService.hasRole('ROLE_ADMIN')" class="btn btn-rounded btn-primary" type="button"
-          [routerLink]="['/presencial/alumnos']">Nuevo Alumno</button>
+    
+
+    <div class="row">
+      <div class="col-8">
+        <div class="my-2 text-left">
+          <button *ngIf="authService.hasRole('ROLE_ADMIN')" class="btn btn-rounded btn-primary" type="button"
+              [routerLink]="['/presencial/alumnos']">Nuevo Alumno</button>
+        </div>       
+      </div>
+      <div class="col-4">
+        <div class="form-group my-2">
+          <input type="text" name="filterAlumno" class="form-control" placeholder="Buscar por apellido" [(ngModel)]="filterAlumno">
+        </div>
+
+      </div>
     </div>
 
     <div *ngIf="alumnos?.length == 0" class="alert alert-info">
@@ -28,7 +40,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let alumno of alumnos">
+        <tr *ngFor="let alumno of alumnos | filter:filterAlumno">
           <td>{{ alumno.id }}</td>
           <td>{{ alumno.nombre }}</td>
           <td>{{ alumno.apellido | uppercase }}</td>
