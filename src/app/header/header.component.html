@@ -13,6 +13,9 @@
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" [routerLink]="['/presencial']">Alumnos</a>
       </li>
+      <li *ngIf="authService.hasRole('ROLE_USER')" class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['presencial/notas']">Notas</a>
+      </li>
     </ul>
     <ul class="navbar-nav navbar-right">
       <li *ngIf="!authService.isAuthenticated()"><a [routerLink]="['presencial/login']" class="btn btn-outline-primary">Sign In</a></li>

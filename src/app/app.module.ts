@@ -19,6 +19,10 @@ import { TokenInterceptor } from './usuarios/interceptors/token.interceptor';
 import { AuthInterceptor } from './usuarios/interceptors/auth.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatPaginatorModule} from '@angular/material/paginator';
+//notas
+import { NotasComponent } from './notas/notas.component';
+import { NotaService } from './notas/nota.service';
+import { FormNotaComponent} from './notas/formnota.component';
 
 
 const routes: Routes = [
@@ -28,7 +32,10 @@ const routes: Routes = [
   {path: 'presencial/page/:page', component: AlumnosComponent},
   {path: 'presencial/alumnos', component: FormComponent, canActivate:[RoleGuard], data:{role:'ROLE_ADMIN'}},
   {path: 'presencial/alumnos/:id', component: FormComponent, canActivate:[RoleGuard], data:{role:'ROLE_ADMIN'}},
-  {path: 'presencial/login', component: LoginComponent}
+  {path: 'presencial/login', component: LoginComponent},
+  {path: 'presencial/notas', component: NotasComponent, canActivate:[RoleGuard], data:{role:'ROLE_USER'}},
+  {path: 'presencial/notas/nuevanota', component: FormNotaComponent, canActivate:[RoleGuard], data:{role:'ROLE_USER'}},
+  {path: 'presencial/alumnos/:alumno_id/notas/:notamateria_id', component: FormNotaComponent, canActivate:[RoleGuard], data:{role:'ROLE_USER'}},
 ]
 
 
@@ -42,6 +49,8 @@ const routes: Routes = [
     FooterComponent,
     HomeComponent,
     ClimaComponent,
+    NotasComponent,
+    FormNotaComponent
   ],
 
   imports: [
@@ -54,8 +63,9 @@ const routes: Routes = [
 
   ],
   providers: [AlumnoService,
+    NotaService,
     {provide:  HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
     {provide:  HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
