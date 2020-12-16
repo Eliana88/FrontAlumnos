@@ -1,0 +1,65 @@
+#buscar { margin-left: 40px; }
+#divmombremateria { margin-left: 40px; }
+#divbuscar  { margin-left: 40px; }
+
+#rowdiv {
+margin-bottom: 20px;
+margin-top: 20px; }
+
+#label{
+margin-top: 3px;
+margin-right: 3px;
+}
+
+.editar{
+    Height: 25px;
+    width: 25px;
+    content:url("../notas/Imagenes/edit-pencil.ico");
+}
+
+.editar:hover {
+    width: 30px;
+    height: 30px;
+    box-shadow:0px 3px 0px #829226;
+}
+
+
+.delete {
+    Height: 30px;
+    width: 25px;
+    content:url("../notas/Imagenes/delete.png");
+}
+
+.delete:hover {
+    width: 30px;
+    cursor: pointer; 
+    box-shadow:0px 3px 0px #829226; 
+}
+
+
+
+
+
+.nuevo {
+    Height: 50px;
+    width: 50px;
+    content:url("../notas/Imagenes/new.png");
+}
+
+.nuevo:hover {
+    
+    cursor: pointer;
+    width: 51px;
+    box-shadow:0px 3px 0px #266792;
+}
+
+.btn-danger {
+    margin-right: 2px;
+}
+
+
+.card-header{
+    color:black;
+    font-size: 25px;
+    font-weight: bold;
+}

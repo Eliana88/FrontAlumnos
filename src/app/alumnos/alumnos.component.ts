@@ -8,7 +8,8 @@ import { PageEvent, MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-alumnos',
-  templateUrl: './alumnos.component.html'
+  templateUrl: './alumnos.component.html',
+  styleUrls: ['./alumnos.component.css']
 })
 
 export class AlumnosComponent implements OnInit {
@@ -65,7 +66,7 @@ export class AlumnosComponent implements OnInit {
       confirmButtonClass: 'btn btn-success',
       cancelButtonClass: 'btn btn-danger',
       buttonsStyling: false,
-      reverseButtons: true
+      reverseButtons: false
     }).then((result) => {
       if (result.value) {
         this.alumnoService.delete(alumno.id).subscribe(

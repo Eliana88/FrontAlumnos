@@ -1,0 +1,113 @@
+<div class="card bg-dark text-white mb-1">
+  <div class="card-header">{{ titulo }}</div>
+      <div class="card-body">
+          <form #notaForm="ngForm">
+
+<!-- el que funciona joya
+        <div class="form-group row">
+          <label for="nombremateria" class="col-form-label col-sm-2">Nombre de materia</label>
+          <div class="col-sm-6">
+            
+              <select required class="form-control" name="nombremateria" [(ngModel)]="nota.nombremateria" #nombremateria="ngModel">
+                <option [value]="item" *ngFor="let item of listamaterias">{{item}}</option>
+              </select>
+
+    
+              <div class="alert alert-danger" *ngIf="nombremateria.invalid &&(nombremateria.dirty || nombremateria.touched)">
+                <div *ngIf="notafinal.errors.required">
+                  Nota materia es requerido.
+                </div>
+              </div>
+            
+        </div>
+      </div>
+    
+-->
+
+<div class="form-group row">
+  <label for="nombremateria" class="col-form-label col-sm-2">Nombre de materia</label>
+  <div class="col-sm-6">
+    
+      <select required class="form-control" ng-init="listamaterias[0].nombremateria"  name="nombremateria" [(ngModel)]="nota.nombremateria" #nombremateria="ngModel">
+        <option [value]="item" *ngFor="let item of listamaterias">{{item}}</option>
+      </select>
+
+
+      <div class="alert alert-danger" *ngIf="nombremateria.invalid &&(nombremateria.dirty || nombremateria.touched)">
+        <div *ngIf="notafinal.errors.required">
+          Nota materia es requerido.
+        </div>
+      </div>
+    
+</div>
+</div>
+
+
+<!--
+        <div class="form-group row">
+          <label for="nombremateria" class="col-form-label col-sm-2">Nombre de materia</label>
+          <div class="col-sm-6">
+            <select required class="form-control" name="nombremateria" [(ngModel)]="nota.nombremateria" #nombremateria="ngModel">
+              <option [value]="item" *ngFor="let item of listamaterias">{{item}}</option>
+            </select>
+              
+                       
+            </div>
+          </div>
+         
+
+
+
+
+
+            <div class="form-group row">
+              <label for="nombremateria" class="col-form-label col-sm-2">Nombre</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" [(ngModel)]="nota.nombremateria" name="nombremateria" required minlength="3" #nombremateria="ngModel">
+                <div class="alert alert-danger" *ngIf="nombremateria.invalid && (nombremateria.dirty || nombremateria.touched)">
+                <div *ngIf="nombremateria.errors.required">
+                  Nombre es requerido.
+                </div>
+                <div *ngIf="nombremateria.errors.minlength">
+                  Nombre debe tener al menos 3 caracteres.
+                </div>
+                </div>
+              </div>
+            </div>
+       -->
+
+
+       
+              <div class="form-group row">
+                  <label for="notafinal" class="col-form-label col-sm-2">Nota final</label>
+                  <div class="col-sm-6">
+                    <input type="text" class="form-control" [(ngModel)]="nota.notafinal" name="notafinal" required #notafinal="ngModel">
+                    <div class="alert alert-danger" *ngIf="notafinal.invalid &&(notafinal.dirty || notafinal.touched)">
+                      <div *ngIf="notafinal.errors.required">
+                        Nota final es requerido.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                
+
+
+
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <button class="btn btn-primary" role="button" (click)='create()'
+                      *ngIf="!nota.notamateria_id else elseBlock" [disabled]="!notaForm.form.valid">Crear</button>
+                    <ng-template #elseBlock>
+                      <button class="btn btn-primary" role="button" (click)='update()' [disabled]="!notaForm.form.valid">Guardar</button>
+                    </ng-template>
+                  </div>
+                </div>
+
+          </form>       
+
+      </div> 
+</div>
+
+
+

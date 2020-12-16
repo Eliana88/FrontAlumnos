@@ -13,9 +13,12 @@
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" [routerLink]="['/presencial']">Alumnos</a>
       </li>
+      <li *ngIf="authService.hasRole('ROLE_USER')" class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['presencial/notas']">Notas</a>
+      </li>
     </ul>
     <ul class="navbar-nav navbar-right">
-      <li *ngIf="!authService.isAuthenticated()"><a [routerLink]="['presencial/login']" class="btn btn-outline-primary">Sign In</a></li>
+      <li *ngIf="!authService.isAuthenticated()"><a [routerLink]="['presencial/login']" class="btn btn-outline-primary">Iniciar sesión</a></li>
 
       <li *ngIf="authService.isAuthenticated()" class="dropdown">
         <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

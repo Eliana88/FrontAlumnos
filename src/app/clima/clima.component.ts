@@ -16,7 +16,6 @@ export class ClimaComponent implements OnInit {
   ngOnInit(): void {
     this.climaService.getWeather().subscribe(
       res => {
-        console.log(res),
         this.clima = res
       },
       err => console.log(err)

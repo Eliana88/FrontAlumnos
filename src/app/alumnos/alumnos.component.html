@@ -4,22 +4,30 @@
     <h3 class="card-title">Listado de alumnos</h3>
 
 
-    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <div class="row">
-      <div class="col-8">
-        <div class="my-2 text-left">
-          <button *ngIf="authService.hasRole('ROLE_ADMIN')" class="btn btn-rounded btn-primary" type="button"
-              [routerLink]="['/presencial/alumnos']">Nuevo Alumno</button>
-        </div>       
-      </div>
-      <div class="col-4">
-        <div class="form-group my-2">
-          <input type="text" name="filterAlumno" class="form-control" placeholder="Buscar por apellido" [(ngModel)]="filterAlumno">
+      <a *ngIf="authService.hasRole('ROLE_ADMIN')" data-toggle="tooltip" [routerLink]="['/presencial/alumnos']" data-placement="top" title="Nuevo alumno">
+        <img class="nuevo" />
+    </a>
+     <!--
+      <button *ngIf="authService.hasRole('ROLE_USER')" class="btn btn-rounded btn-primary" type="button"
+      [routerLink]="['nuevanota']">Nueva nota</button>
+-->
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <a class="navbar-brand" href="#"></a>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item active">
+            <a class="nav-link" href="#"><span class="sr-only"></span></a>
+          </li>
+        </ul>
+        <div class="form-inline my-2 my-lg-0">
+           <input type="text" name="filterAlumno" class="form-control" placeholder="Buscar por apellido" [(ngModel)]="filterAlumno">
         </div>
-
       </div>
-    </div>
+    </nav>
 
     <div *ngIf="alumnos?.length == 0" class="alert alert-info">
       No hay registros en la base de datos.
@@ -47,10 +55,16 @@
           <td>{{ alumno.email }}</td>
           <td>{{ alumno.afiliado }}</td>
           <td *ngIf="authService.hasRole('ROLE_ADMIN')">
-            <button type="button" name="editar" [routerLink] ="['/presencial/alumnos', alumno.id]" class="btn btn-primary btn-sm">Editar</button>
+            <!--<button type="button" name="editar" [routerLink] ="['/presencial/alumnos', alumno.id]" class="btn btn-primary btn-sm">Editar</button>-->
+            <a  [routerLink] ="['/presencial/alumnos', alumno.id]" data-toggle="tooltip" data-placement="top" title="Editar">
+              <img class="editar" />
+          </a>
           </td>
           <td *ngIf="authService.hasRole('ROLE_ADMIN')">
-            <button type="button" name="borrar" (click)='delete(alumno)' class="btn btn-danger btn-sm">Borrar</button>
+           <!-- <button type="button" name="borrar" (click)='delete(alumno)' class="btn btn-danger btn-sm">Borrar</button>-->
+            <a  data-toggle="tooltip" (click)='delete(alumno)' data-placement="top" title="Eliminar">
+              <img class="delete" />
+          </a>
           </td>
         </tr>
       </tbody>

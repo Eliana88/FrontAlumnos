@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
       let usuario = this.authService.usuario;
 
       this.router.navigate(['/presencial']);
-      swal('Login', `Hola ${usuario.username}, iniciaste sesión`, 'success');
+      swal('Bienvenido', `Hola ${usuario.username}, iniciaste sesión`, 'success');
     }, error =>{
       if(error.status == 400){
         swal('Error Login', 'Credenciales inválidas', 'error');

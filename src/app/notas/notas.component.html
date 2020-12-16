@@ -1,0 +1,122 @@
+<div class="card border-primary mt-1 mb-1 text-center">
+  <div class="card-header">Mis notas</div>
+  <div class="card-body text-primary">
+    <h3 class="card-title"></h3>
+
+ <!--
+    <div id="rowdiv" class="row">
+      <div class="col-md-2">
+        <button *ngIf="authService.hasRole('ROLE_USER')" class="btn btn-rounded btn-primary" type="button"
+          [routerLink]="['nuevanota']">Nueva nota</button>
+      </div>
+      <div id="label" class="col-md-2">
+        Nombre de materia:
+      </div>
+      <div class="col-md-2">
+        <input type="text" class="form-control"  name="nombremateria" required> 
+      </div>
+      <div class="col-md-1">
+        <button *ngIf="authService.hasRole('ROLE_USER')" class="btn btn-rounded btn-primary" type="button"
+        [routerLink]="['presencial/notas']">Filtrar</button>
+      </div>
+    </div>
+  -->
+
+
+    <!-- la pequeña parte
+  <div class="row">
+    
+    
+    <div class="form-group row">
+      <label for="nombremateria">Nombre de materia</label>
+    
+
+    <div class="my-2 text-left" id="divmombremateria">
+      <input type="text" class="form-control"  name="nombremateria" required> 
+    </div>
+
+    <div class="my-2 text-left" id="divbuscar">
+    <button *ngIf="authService.hasRole('ROLE_USER')" class="btn btn-rounded btn-primary" type="button"
+          [routerLink]="['nuevanota']">Filtrar</button>
+    </div>
+  </div>
+    
+  </div>
+
+  -->
+
+    <!--
+    <div *ngIf="notas?.length==0" class="alert alert-info">
+      No hay registros en la base de datos.
+    </div>
+    -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <a *ngIf="authService.hasRole('ROLE_USER')" data-toggle="tooltip" [routerLink]="['nuevanota']" data-placement="top" title="Nueva nota">
+        <img class="nuevo" />
+    </a>
+     <!--
+      <button *ngIf="authService.hasRole('ROLE_USER')" class="btn btn-rounded btn-primary" type="button"
+      [routerLink]="['nuevanota']">Nueva nota</button>
+-->
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <a class="navbar-brand" href="#"></a>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item active">
+            <a class="nav-link" href="#"><span class="sr-only"></span></a>
+          </li>
+        </ul>
+        <div class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" name="nombremateriabuscar" #nombremateriabuscar placeholder="Buscar materia" aria-label="Materia" required>
+          <button  (click)="getFilterNotaMateria(nombremateriabuscar.value)" class="btn btn-outline-success my-2 my-sm-0">Buscar</button>
+        </div>
+      </div>
+    </nav>
+
+    <div *ngIf="notas?.length == 0" class="alert alert-info">
+      No se encontraron notas.
+    </div>
+
+  <div *ngIf="notas?.length>0">
+    <table class="table table-hover table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Nombre de materia</th>
+          <th>Nota final</th>
+          <th *ngIf="authService.hasRole('ROLE_USER')">
+            Editar
+          </th>
+          <th *ngIf="authService.hasRole('ROLE_USER')">Eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let nota of notas">
+          <td>{{ nota.nombremateria }}</td>
+          <td>{{ nota.notafinal}}</td>
+          
+  
+          <td *ngIf="authService.hasRole('ROLE_USER')">
+            <!--<button type="button" name="editar2" [routerLink] ="['/presencial/alumnos/', nota.alumno_id,'notas', nota.notamateria_id]" class="btn btn-primary btn-sm" id="editar">Editar</button> -->
+            <a  [routerLink] ="['/presencial/alumnos/', nota.alumno_id,'notas', nota.notamateria_id]" data-toggle="tooltip" data-placement="top" title="Editar">
+              <img class="editar" />
+          </a>
+          </td>
+          <td *ngIf="authService.hasRole('ROLE_USER')">
+
+            <a  data-toggle="tooltip" (click)='delete(nota)' data-placement="top" title="Eliminar">
+              <img class="delete" />
+          </a>
+           <!-- <button type="button" name="borrar" (click)='delete(nota)' class="btn btn-danger btn-sm">Borrar</button>       
+            -->
+            </td>
+        
+        </tr>
+      </tbody>
+    </table>   
+  </div>
+
+  </div>
+</div>
