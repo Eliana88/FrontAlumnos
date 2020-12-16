@@ -20,10 +20,14 @@ import { TokenInterceptor } from './usuarios/interceptors/token.interceptor';
 import { AuthInterceptor } from './usuarios/interceptors/auth.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatPaginatorModule} from '@angular/material/paginator';
+
 //notas
 import { NotasComponent } from './notas/notas.component';
 import { NotaService } from './notas/nota.service';
 import { FormNotaComponent} from './notas/formnota.component';
+//Filtro alumnos
+import { FilterPipe } from './alumnos/filter.pipe';
+
 
 
 const routes: Routes = [
@@ -51,7 +55,8 @@ const routes: Routes = [
     HomeComponent,
     ClimaComponent,
     NotasComponent,
-    FormNotaComponent
+    FormNotaComponent,
+    FilterPipe,
   ],
 
   imports: [

@@ -28,6 +28,8 @@ export class AlumnosComponent implements OnInit {
               public authService: AuthService,
               private activatedRoute: ActivatedRoute ) { }
 
+  filterAlumno = '';            
+
   ngOnInit(): void {
     this.calcularRangos();
   }
@@ -46,7 +48,7 @@ export class AlumnosComponent implements OnInit {
       { 
         this.alumnos = p.content as Alumno[];
         this.totalRegistros = p.totalElements as number;
-        this.paginator._intl.itemsPerPageLabel = 'Registros por página';
+        //this.paginator._intl.itemsPerPageLabel = 'Registros por página';
 
       });
   }
