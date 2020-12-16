@@ -19,6 +19,8 @@ export class NotasComponent implements OnInit {
 
   notas: Nota[];
   alumnoID:any;
+  notas2: any;
+ 
   private current_mail: string;
   
   
@@ -32,27 +34,90 @@ export class NotasComponent implements OnInit {
     this.current_mail = this.authService.usuario.email;
     this.getAlumnoIDByEmail(this.current_mail);  
     
+   
+   //this.notas.push(new Nota(21,'nombre',21,10));
+    //console.log(this.notas);
+    
   }
   
 
   getAlumnoIDByEmail(email: string){
     {     
       this.notaService.getAlumnoIDByEmail(email).subscribe(
-        res => { console.log('en el metodo' + res);
+        res => { 
+        //console.log('en el metodo' + res);
         //this.alumnoID=res;
-        console.log('alumno id :' + res);
+        //console.log('alumno id :' + res);
         sessionStorage.setItem('alumnoid', res);
-        this.getnotaMateriabyAlumnoID(res);
+        let nombremateria=sessionStorage.getItem("nombremateria");
+        if (nombremateria)
+          this.getNombreMateriaByAlumnoID();
+        else
+          this.getnotaMateriabyAlumnoID(res);
       });
              
     }
   }
 
+
+  getFilterNotaMateria(nombremateria:string){
+    //console.log('aca llega el id buscado:' + id)
+    if (nombremateria!='')
+      {
+        sessionStorage.setItem("nombremateria",nombremateria);
+        this.redirectTo();
+      }
+  }
+
+
+
+
   getnotaMateriabyAlumnoID(id:string){
     //console.log('aca llega el id buscado:' + id)
+    this.notas=[];
     this.notaService.getnotaMateriabyAlumnoID(id).subscribe(
-    response=>{console.log(response);
-      this.notas =  response as Nota[];
+    response=>{
+      if (response==null)
+      this.notas=[];
+    else{
+      let vec:Nota[];
+      vec=response as Nota[];
+      if (vec.length>1) {
+        this.notas =  response as Nota[];
+      } else {
+        let notamateriabuscada= response as Nota;
+        this.notas=[];
+        this.notas.push(notamateriabuscada);
+      }
+    }
+    })
+  }
+
+  //Filtra el resultado de notas por Nombre de materia
+  getNombreMateriaByAlumnoID(){
+    //console.log('aca llega el id buscado:' + id)
+    let alumno_id=parseInt(sessionStorage.getItem('alumnoid'))
+    let nombremateria=sessionStorage.getItem('nombremateria')
+    this.notas=[];
+    this.notaService.getNombreMateriaByAlumnoID(nombremateria,alumno_id).subscribe(
+    response=>{
+    if (response==null)
+      this.notas=[];
+    else{
+      let vec:Nota[];
+      vec=response as Nota[];
+      if (vec.length>1) {
+        this.notas =  response as Nota[];
+      } else {
+        let notamateriabuscada= response as Nota;
+        this.notas=[];
+        this.notas.push(notamateriabuscada);
+      }
+    }
+
+      //this.notas =  response as Nota[];
+
+      sessionStorage.removeItem("nombremateria");
     })
   }
 
@@ -60,7 +125,7 @@ export class NotasComponent implements OnInit {
   delete(nota: Nota): void {
     swal({
       title: 'Está seguro?',
-      text: `¿Seguro que desea eliminar la nota ${nota.nombremateria} ${nota.notafinal}?`,
+      text: `¿Seguro que desea eliminar la nota ${nota.nombremateria}?`,
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -70,7 +135,7 @@ export class NotasComponent implements OnInit {
       confirmButtonClass: 'btn btn-success',
       cancelButtonClass: 'btn btn-danger',
       buttonsStyling: false,
-      reverseButtons: true
+      reverseButtons: false
     }).then((result) => {
       if (result.value) {
         this.notaService.delete(nota.alumno_id,nota.notamateria_id).subscribe(
@@ -91,7 +156,7 @@ export class NotasComponent implements OnInit {
       }
       else
       {
-        console.log('vienr po aca')
+        //console.log('vienr po aca')
         this.router.navigate(['presencial/notas'])
       }
       
@@ -108,6 +173,9 @@ export class NotasComponent implements OnInit {
  }
 
 
+
+
+  
 
  
 }

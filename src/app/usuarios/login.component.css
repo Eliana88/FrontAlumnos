@@ -1,0 +1,8 @@
+.border-primary {
+    border-color: red;
+}
+
+
+.card{
+    border: 1px solid rgba(0, 0, 0, 0.125)
+  }

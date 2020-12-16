@@ -24,15 +24,21 @@ export class FormNotaComponent implements OnInit {
   ngOnInit(): void {
     this.cargarNota();
     this.listamaterias =[
+     'Administración de proyectos', 
      'Algoritmo',
-     'Etica profesional',
+     'Análisis y metodología de sistemas',
+     'Ética profesional', 
      'Estadística',
+     'Estructura de datos',
+     'Introducción a la informática',
+     'Seguridad e integridad de sistemas',
      'Sistemas administrativos',
-     'Taller 6'
-
+     'Taller de creactividad e innovación',
+     'Taller de prácticas de sistemas',
+     'Taller VI'
   ];
   
-    //this.current_mail = this.authService.usuario.email;
+    this.current_mail = this.authService.usuario.email;
     //this.getAlumnoIDByEmail(this.current_mail); 
   }
 
@@ -49,7 +55,6 @@ export class FormNotaComponent implements OnInit {
   }
 
   create(): void{
-    console.log("Clicked");
     this.nota.alumno_id=parseInt(sessionStorage.getItem('alumnoid'))
     this.notaService.create(this.nota)
     .subscribe(nota => {

@@ -43,12 +43,23 @@ margin-right: 3px;
 .nuevo {
     Height: 50px;
     width: 50px;
-    content:url("../notas/Imagenes/new-file_40454.ico");
+    content:url("../notas/Imagenes/new.png");
 }
 
 .nuevo:hover {
     
     cursor: pointer;
-    
+    width: 51px;
     box-shadow:0px 3px 0px #266792;
+}
+
+.btn-danger {
+    margin-right: 2px;
+}
+
+
+.card-header{
+    color:black;
+    font-size: 25px;
+    font-weight: bold;
 }

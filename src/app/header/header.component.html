@@ -18,7 +18,7 @@
       </li>
     </ul>
     <ul class="navbar-nav navbar-right">
-      <li *ngIf="!authService.isAuthenticated()"><a [routerLink]="['presencial/login']" class="btn btn-outline-primary">Sign In</a></li>
+      <li *ngIf="!authService.isAuthenticated()"><a [routerLink]="['presencial/login']" class="btn btn-outline-primary">Iniciar sesión</a></li>
 
       <li *ngIf="authService.isAuthenticated()" class="dropdown">
         <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

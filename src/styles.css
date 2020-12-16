@@ -7,5 +7,22 @@ html{
   padding-bottom: 60px;
 }
 
-html, body { height: 100%; }
+html, body { height: 100%;}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+
+title{
+  font: outline;align-self: start;
+}
+
+h1{color: blue;}
+
+
+.card{
+  border: 1px solid rgba(0, 0, 0, 0.125)
+}
+
+.btn-danger {
+  margin-left: 10px;
+}

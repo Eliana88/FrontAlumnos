@@ -18,7 +18,7 @@ export class HeaderComponent {
   logout(): void {
     let username = this.authService.usuario.username;
     this.authService.logout();
-    swal('Logout', `Hola ${username}, has cerrado sesión con éxito!`, 'success');
+    swal('Hasta pronto', `Adios ${username}, has cerrado sesión con éxito!`, 'success');
     this.router.navigate(['presencial/login']);
   }
 

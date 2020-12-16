@@ -23,7 +23,6 @@ export class RoleGuard implements CanActivate {
       }
 
       let role = next.data['role'] as string;
-      console.log(role);
       if(this.authService.hasRole(role)){
         if(this.isTokenExperidado()){
           this.authService.logout();
